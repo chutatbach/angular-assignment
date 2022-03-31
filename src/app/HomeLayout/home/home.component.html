@@ -1,0 +1,110 @@
+<header class="p-3 mb-3 border-bottom">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+        <img src="https://caodang.fpt.edu.vn/vinmart/images/x2017-FPTPolytechic-01.jpg.pagespeed.ic.7gM_dxeJzr.jpg" width="100px" alt="">
+      </a>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 mx-3">
+        <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
+        <li><a href="http://localhost:4200/admin/" class="nav-link px-2 link-dark">Admin</a></li>
+      </ul>
+      <div class="main-search">
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <div class="input-box"> <input type="text" class="form-control"> <i class="fa fa-search"></i> </div>
+        </form>
+          <div class="d-flex flex-column justify-content-center content-search">
+            <div class="list border-bottom"> <i class="fa fa-fire"></i>
+              <div class="d-flex flex-column ml-3"> <span>Client communication policy</span> <small>#politics - may -
+                  @max</small> </div>
+            </div>
+            <div class="list border-bottom"> <i class="fa fa-fire"></i>
+              <div class="d-flex flex-column ml-3"> <span>Calling to USA Clients</span> <small>#entertainment - dec -
+                  @tunes</small> </div>
+            </div>
+            <div class="list"> <i class="fa fa-weibo"></i>
+              <div class="d-flex flex-column ml-3"> <span>Client communication policy</span> <small>#politics - may -
+                  @max</small> </div>
+            </div>
+          </div>
+      </div>
+
+
+      <div class="dropdown text-end d-flex">
+        <div class="d-block link-dark text-decoration-none dropdown-toggle clickdropdown" (click)="dropdown()"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://avatarfiles.alphacoders.com/445/44511.jpg" alt="mdo" width="32" height="32"
+            class="rounded-circle">
+          <span class="mx-2">Chu tat bach</span>
+        </div>
+        <ul [ngStyle]="{'opacity':style.opacity,'z-index':style.zindex}" class="dropdown-user">
+          <li><a class="dropdown-item" href="#">New project...</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#" (click)="logout()">Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<router-outlet>
+</router-outlet>
+<footer class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img"
+        viewBox="0 0 24 24">
+        <title>Product</title>
+        <circle cx="12" cy="12" r="10" />
+        <path
+          d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" />
+      </svg>
+      <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Cool stuff</a></li>
+        <li><a class="link-secondary" href="#">Random feature</a></li>
+        <li><a class="link-secondary" href="#">Team feature</a></li>
+        <li><a class="link-secondary" href="#">Stuff for developers</a></li>
+        <li><a class="link-secondary" href="#">Another one</a></li>
+        <li><a class="link-secondary" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Resource name</a></li>
+        <li><a class="link-secondary" href="#">Resource</a></li>
+        <li><a class="link-secondary" href="#">Another resource</a></li>
+        <li><a class="link-secondary" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Business</a></li>
+        <li><a class="link-secondary" href="#">Education</a></li>
+        <li><a class="link-secondary" href="#">Government</a></li>
+        <li><a class="link-secondary" href="#">Gaming</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="link-secondary" href="#">Team</a></li>
+        <li><a class="link-secondary" href="#">Locations</a></li>
+        <li><a class="link-secondary" href="#">Privacy</a></li>
+        <li><a class="link-secondary" href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

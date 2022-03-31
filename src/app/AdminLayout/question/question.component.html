@@ -1,0 +1,57 @@
+<!-- <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+    <input type="search" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="keyword" (keyup)="search()">
+</div> -->
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="">
+            <div class="rounded" style="padding: 10px;    box-shadow: 5px 5px 5px 5px #00000061;">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    <form action="">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="switchMain">
+                                            <label class="custom-control-label" for="switchMain">Toggle me</label>
+                                        </div>
+                                    </form>
+                                </th>
+                                <th>Question</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="table-body" *ngIf="quiz.length > 0">
+                            <tr class="cell-1" *ngFor="let item of quiz">
+                                <td class="text-center">
+                                    <form action="">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="switch{{item.id}}">
+                                            <label class="custom-control-label" for="switch{{item.id}}">Toggle
+                                                me</label>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>{{item.Text}}</td>
+                                <!-- <td><i class="fa fa-ellipsis-h text-black-50"></i></td> -->
+                                <td><a href="http://localhost:4200/admin/sinh-vien/edit/{{item.id}}"
+                                        class="badge badge-info">Update</a></td>
+                                <td><span href="" class="badge badge-danger cursor-pointer">Delete</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- $(document).ready(function(){
+
+    $('.toggle-btn').click(function() {
+    $(this).toggleClass('active').siblings().removeClass('active');
+    });
+    
+    }); -->

@@ -1,0 +1,29 @@
+.body {
+    background: linear-gradient(to right, #c04848, #480048);
+    min-height: 100vh
+}
+
+.text-gray {
+    color: #aaa
+}
+
+img {
+    height: 170px;
+    width: 140px
+}
+
+.btn {
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 20px
+}
+
+a:hover {
+    text-decoration: none
+}
+
+.btn-hover:hover{
+    background-color: #e03e3e;
+    transition: all 0.3s;
+}

@@ -1,0 +1,185 @@
+
+directive: nhận dữ liệu component theo câu lệnh riêng angular
+structural: *+câu lệnh => *ngFor,*ngIf
+Attribute: [name] = "value in class"
+
+data binding: 
+data 1 chiều {{value}}: bên componet thay đôi value của thuộc tính thì bên view cũng thay đổi theo
+data 2 chiều [(value)]: bên componet thay đổi value của thuộc tính thì bên view cũng thay đổi theo
+hoặc bên view người dùng thay đổi value của thuộc tính trong componet thì bên component cũng thay đổi theo
+
+- tham chiếu : 
+a = 5 // lưu bộ nhớ là 5
+b = a // lưu tiêp chung bộ nhớ là 5
+khi thay đổi a thì giá trị b sẽ thay vì không chung ô nhớ
+- tham trị : 
+a = 5 // lưu bộ nhớ là 5
+b = a // lưu thêm vào bộ nhớ mới là 5
+khi thay đổi a thì giá trị b vẫn giữ nguyên vì không chung 1 ô nhớ
+
+pipe: để chuyển đổi dữ liệu 
+VD -> {{dữ liệu | name pipe có nghĩa , hoặc tự tạo}}
+pipe có sẵn,pipe tự tạo 
+pipe => tính năng để giúp format lại giá trị hiển thị cho dữ liệu
+có thể tự tạo ra pipe mới để sử dụng trong dự án
+ng g pipe tên-pipe
+
+câu lệnh để tạo ra component:
+ng g component tên-component
+
+khi thực hiện bấm nút xóa ở component con (hero-item)
+=> 1. gửi request lên server và xóa bản ghi khỏi csdl
+=> 2. thông báo cho component cha (app component) loại bỏ phần tử vừa
+bị xóa khỏi mảng heroes
+@Input : tạo ra 1 thuộc tính của component con nhằm mục đích nhận dữ liệu từ
+component cha
+@Output: tạo ra 1 sự kiện cho component con nhằm mục đích gửi dữ liệu
+từ component con => component cha (event emit)
+
+app-routing.module.ts 
+các thằng component con sẽ được hiển thị ở thẻ <router-outlet></router-outlet>
+
+ng g s name_services
+
+ng g  guard  helpers/auth 
+promise(function(resolve,reject){
+  return data  
+})
+.resolve((data) => {
+  return data
+})
+.resolve((data) => {
+  return data
+})
+.reject((error) => {
+  console.log(error)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main class="container">
+
+  <h3>Bai tập buổi 3</h3>
+
+  <table class="table table-hover">
+    <thead>
+      <th>Ma so</th>
+      <th>Ten</th>
+      <th>Anh</th>
+      <th>Gioi tinh</th>
+      <th>delete</th>
+      <th>update</th>
+    </thead>
+    <tbody *ngIf="heroes.length > 0">
+      <app-hero-item  (removeHero)="remove($event)"  (updateHero)="update(item)" *ngFor="let item of heroes" [herodata] = "item"></app-hero-item>
+      <!-- <tr *ngFor="let item of heroes">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td><img [src]="item.avatar" alt="" width="100px"></td>
+        <td>{{item.gender==0?"nam":"nu"}}</td>
+        <td><button class="btn btn-sm btn-danger" (click)="remove(item)">delete</button></td>
+        <td><button (click)="update(item)" class="btn btn-sm btn-info">Sửa</button></td>
+      </tr> -->
+    </tbody>
+  </table>
+
+  <div class="row">
+    <h3>Form hero</h3>
+    {{formHero | json}}
+    <br>
+    {{ birthDate | date }} 
+    <br>
+    {{price | currency: "VND"}}
+    <!---thay doi tat ca value trong class ma khong can den event , ma event cung k thay doi dc gia tri --->
+    <app-hero-form>
+    </app-hero-form>
+    
+    <div class="form-group">
+      <label for="">ten</label>
+      <input type="text" name="" [(ngModel)]="formHero.name" id="" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="">anh</label>
+      <input type="text" name="" [(ngModel)]="formHero.avatar" id="" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="">gioi tinh</label>
+      <select name="" [(ngModel)]="formHero.gender" id="" class="form-control">
+        <option value="0">nam</option>
+        <option value="1">nu</option>
+      </select>
+    </div>
+    <input type="text" name="" [(ngModel)]="formHero.id" id="" class="form-control" hidden>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger" (click)="submitForm()">create</button>
+    </div>
+  </div>
+</main>
+
+<main class="container">
+
+  <h3>Lab 2</h3>
+
+  <table class="table table-hover">
+    <thead>
+      <th>code</th>
+      <th>name</th>
+      <th>avatar</th>
+      <th>blood</th>
+      <th>armor</th>
+      <th>delete</th>
+      <th>update</th>
+    </thead>
+    <tbody *ngIf="enemies.length > 0">
+      <!-- neu arr > 0 thi hien thi data--->
+      <tr *ngFor="let item of enemies">
+        <td>{{item.code}}</td>
+        <td>{{item.name}}</td>
+        <td><img [src]="item.avatar" alt="" width="100px"></td>
+        <td>{{item.blood}}</td>
+        <td>{{item.armor}}</td>
+        <td><button class="btn btn-sm btn-danger" (click)="remove_lab2(item)">delete</button></td>
+        <td><button class="btn btn-sm btn-primary" (click)="update_lab2(item)">update</button></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="row">
+    <h3>Form Enemies</h3>
+    {{FormEnemies | json}}
+    <!---thay doi tat ca value trong class ma khong can den event , ma event cung k thay doi dc gia tri --->
+    <div class="form-group">
+      <label for="">ma so</label>
+      <input type="text" name="" [(ngModel)]="FormEnemies.code" id="" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="">ten</label>
+      <input type="text" name="" [(ngModel)]="FormEnemies.name" id="" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="">anh</label>
+      <input type="text" name="" [(ngModel)]="FormEnemies.avatar" id="" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="">blood</label>
+      <input type="text" name="" [(ngModel)]="FormEnemies.blood" id="" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="">armor</label>
+      <input type="text" name="" [(ngModel)]="FormEnemies.armor" id="" class="form-control">
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn" (click)="submitFormLab2()">create</button>
+    </div>
+  </div>
+</main>

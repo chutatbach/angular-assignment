@@ -1,0 +1,132 @@
+<div class="global-container">
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 w-100">
+                <!-- [formGroup]="loginForm" -->
+                <!-- login_wrapper -->
+                <div class="login_wrapper">
+                    <div class="section">
+                        <div class="container">
+                            <div class="row full-height justify-content-center">
+                                <div class="col-12 text-center align-self-center py-5">
+                                    <div class="section pb-5 pt-5 pt-sm-2 text-center"> <input class="checkbox"
+                                            type="checkbox" id="reg-log" name="reg-log" /> <label for="reg-log"></label>
+                                        <div class="card-3d-wrap mx-auto">
+                                            <div class="card-3d-wrapper">
+                                                <div class="card-front">
+                                                    <div class="center-wrap">
+                                                        <div class="section text-center">
+                                                            <h4 class="mb-4 my-3 pb-3 text-white">Log In</h4>
+                                                            <form action="" [formGroup]="studentForm"
+                                                                (ngSubmit)='submitForm()'>
+                                                                <div class="form-group">
+                                                                    <label for="" class="text-white">Email</label>
+                                                                    <input type="text" name="logemail"
+                                                                        class="form-style" placeholder="Your Email"
+                                                                        [(ngModel)]="student.email"
+                                                                        formControlName="Email" id="logemail"
+                                                                        autocomplete="off" > 
+                                                                        <i
+                                                                        class="input-icon uil uil-at"></i>
+                                                                    <div class="show-error mt-3">
+                                                                        <div *ngIf="Email.invalid && (Email.dirty || Email.touched)"
+                                                                            class="alert alert-danger">
+                                                                            <div *ngIf="Email.errors['required']">
+                                                                                Email is required.
+                                                                            </div>
+                                                                            <div *ngIf="Email.errors['minlength']">
+                                                                                Email must be at least 10 characters
+                                                                                long.
+                                                                            </div>
+                                                                            <div
+                                                                                *ngIf="Email.errors?.['email']">
+                                                                                Email error
+                                                                            </div>
+                                                                            <div
+                                                                                *ngIf="Email.errors?.['forbiddenName']">
+                                                                                Name cannot be Bob.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group mt-2">
+                                                                    <label for="" class="text-white">Password</label>
+                                                                    <input type="password" name="logpass"
+                                                                        class="form-style" placeholder="Your Password"
+                                                                        formControlName="Pass" id="logpass" name
+                                                                        autocomplete="off"> <i
+                                                                        class="input-icon uil uil-lock-alt"></i>
+
+                                                                    <div class="show-error mt-3">
+                                                                        <div *ngIf="Pass.invalid && (Pass.dirty || Pass.touched)"
+                                                                            class="alert alert-danger">
+                                                                            <div *ngIf="Pass.errors['required']">
+                                                                                Password is required.
+                                                                            </div>
+                                                                            <div *ngIf="Pass.errors['minlength']">
+                                                                                Password must be at least 10 characters
+                                                                                long.
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div><button class="btn mt-4" type="submit"
+                                                                    [disabled]="!studentForm.valid">submit</button>
+                                                                <p class="mb-0 mt-4 text-center"><a href="#0"
+                                                                        class="link">Forgot your password?</a></p>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-back">
+                                                    <div class="center-wrap">
+                                                        <div class="section text-center">
+                                                            <h4 class="mb-4 pb-3 text-white">Sign Up</h4>
+                                                            <form action="">
+                                                                <div class="form-group"> <label for="" class="text-white">Username </label>
+                                                                    <input type="text" name="logname" class="form-style"
+                                                                        placeholder="Your Full Name" id="logname"
+                                                                        autocomplete="off"> <i
+                                                                        class="input-icon uil uil-user"></i>
+                                                                </div>
+                                                                <div class="form-group mt-2"> <label for="" class="text-white">Email </label> <input type="email"
+                                                                        name="logemail" class="form-style"
+                                                                        placeholder="Your Email" id="logemail"
+                                                                        autocomplete="off"> <i
+                                                                        class="input-icon uil uil-at"></i> </div>
+                                                                <div class="form-group mt-2"> <label for="" class="text-white">Password </label> <input type="password"
+                                                                        name="logpass" class="form-style"
+                                                                        placeholder="Your Password" id="logpass"
+                                                                        autocomplete="off"> <i
+                                                                        class="input-icon uil uil-lock-alt"></i> </div>
+                                                                <a href="#" class="btn mt-4">submit</a>
+
+
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <a href="#"
+                                                class="btn btn-primary facebook">
+                                                <span>Login with Facebook</span> <i class="fa fa-facebook"></i> </a>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <a
+                                                class="btn btn-primary google-plus" (click)="googleLogin()"> Login with
+                                                Google <i class="fa fa-google-plus"></i> </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> <!-- /.login_wrapper-->
+            </div>
+        </div>
+    </div>
+</div>

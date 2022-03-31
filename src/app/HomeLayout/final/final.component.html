@@ -1,0 +1,52 @@
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light banner">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 fw-normal">Punny headline</h1>
+        <p class="lead fw-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this
+            example based on Apple’s marketing pages.</p>
+        <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+</div>
+<div class="container py-5 body">
+    <div class="row text-center text-white mb-5">
+        <div class="col-lg-7 mx-auto">
+            <h1 class="display-4">Final students List</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto" *ngFor="let item of user ; let i = index ">
+            <!-- List group-->
+            <ul class="list-group shadow" *ngIf="isObject(item.marks) && item.marks[id]  ">
+                <!-- list group item-->
+                <li class="list-group-item">
+                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                            <h5 class="mt-0 font-weight-bold mb-2">{{item.fullname}}</h5>
+                            <p class="font-italic text-muted mb-0 small">{{item.email}} | {{item.birthday}} |
+                                {{item.username}} | {{item.code}}</p>
+                            <p class="font-italic text-muted mb-0 small">Số điểm nhận được {{item.marks[id]}}</p>
+                            <div class="d-flex align-items-center justify-content-between mt-1">
+                                <div><a href="http://localhost:4200/quiz/2/ketqua"> <button
+                                            class="btn btn-dark text-uppercase btn-hover"> Chọn </button></a> </div>
+                                <ul class="list-inline small">
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                    <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                                </ul>
+                            </div>
+                        </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200"
+                            class="ml-lg-5 order-1 order-lg-2">
+                    </div> <!-- End -->
+                    <!-- Custom content-->
+
+                </li> <!-- End -->
+                <!-- list group item -->
+            </ul> <!-- End -->
+
+        </div>
+    </div>
+</div>
