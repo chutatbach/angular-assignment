@@ -1,4 +1,6 @@
 
+
+
 directive: nhận dữ liệu component theo câu lệnh riêng angular
 structural: *+câu lệnh => *ngFor,*ngIf
 Attribute: [name] = "value in class"
@@ -31,6 +33,8 @@ khi thực hiện bấm nút xóa ở component con (hero-item)
 => 1. gửi request lên server và xóa bản ghi khỏi csdl
 => 2. thông báo cho component cha (app component) loại bỏ phần tử vừa
 bị xóa khỏi mảng heroes
+
+sử dụng componnet cha con khi mà thằng componnet con cần đến dữ liệu thằng cha
 @Input : tạo ra 1 thuộc tính của component con nhằm mục đích nhận dữ liệu từ
 component cha
 @Output: tạo ra 1 sự kiện cho component con nhằm mục đích gửi dữ liệu

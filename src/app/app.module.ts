@@ -29,6 +29,7 @@ import { EditQuestionComponent } from './AdminLayout/edit-question/edit-question
 import { SubjectAdminComponent } from './AdminLayout/subject-admin/subject-admin.component';
 import { DashboardComponent } from './AdminLayout/dashboard/dashboard.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,8 @@ import { DashboardComponent } from './AdminLayout/dashboard/dashboard.component'
     HttpClientModule,
     SocialLoginModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

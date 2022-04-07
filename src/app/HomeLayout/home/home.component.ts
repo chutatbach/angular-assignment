@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/services/auth-services.service';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-home',
@@ -13,13 +14,27 @@ export class HomeComponent implements OnInit {
     zindex: '',
   }
   check: boolean = true
+  user: any = {
+    fullname: "",
+    googleID: "",
+    avatar: ""
+  }
 
 
-  constructor(private authServive: AuthServicesService) {
+  constructor(private authServive: AuthServicesService, private google: StudentService) {
 
   }
 
   ngOnInit(): void {
+    var profile: any = JSON.parse(localStorage.getItem('login_user') || "{}")
+    // console.log(profile.googleID)
+
+    this.google.google_id(profile.googleID)
+      .subscribe(data => {
+        this.user = { ...data[0] }
+      })
+
+
     // click_img()
   }
   dropdown() {
@@ -36,7 +51,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  logout(){
+  logout() {
     this.authServive.logout()
   }
 

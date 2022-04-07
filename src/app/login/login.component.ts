@@ -60,9 +60,6 @@ export class LoginComponent implements OnInit {
     // console.log(this.Email)
     // console.log(this.studentForm.controls)
     // console.log(this.studentForm.get('Email'))
-   
-   
-    
   }
   submitForm() {
     window.location.href = "http://localhost:4200/mon-hoc"
@@ -71,11 +68,10 @@ export class LoginComponent implements OnInit {
     // console.log(this.authService)
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(data => {
-        // console.log(data)
+        console.log(data)
         this.auth.login(data.email,data.id)
         // console.log( this.auth.login(data.email,data.id))
         // this.router.navigate(['/mon-hoc']);
-        // window.location.href = "http://localhost:4200/mon-hoc"
       })
       // let lastname = localStorage.getItem('login-user');
       // console.log(lastname)

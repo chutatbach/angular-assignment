@@ -1,7 +1,7 @@
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light banner">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
         <h1 class="display-4 fw-normal">Quiz</h1>
-        <p class="lead fw-normal">Xin chào bạn đến Web làm bài tập quiz với trang quiz của Bách đẹp trai số 1 thế giới.
+        <p class="lead fw-normal">Xin chào bạn đến Web làm bài tập quiz Thời gian còn: {{mili}} Giây.
         </p>
         <a class="btn btn-outline-secondary my-3" href="#">Coming soon</a>
     </div>
@@ -16,12 +16,13 @@
     </div>
     <div class="row" *ngIf="quiz.length > 0">
         <div class="" *ngFor="let item of quiz ; let i = index">
-            <div class="" *ngIf="i < 10">
+            <div class="">
                 <div class="question ml-sm-5 pl-sm-5 pt-2">
                     <div class="py-2 h5"><b>{{i + 1}}. {{item.Text}}?</b></div>
                     <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-                        <label class="options" *ngFor="let itemChild of item.Answers ">{{itemChild.Text}} <input
-                                type="radio" name="radio"> <span class="checkmark"></span> </label>
+                        <label class="options" *ngFor="let itemChild of item.Answers ">{{itemChild.Text}} 
+                            <input type="radio" [name]="item.Id" [value]="itemChild.Id" (change)="clickAnswer(item.AnswerId,itemChild.Id)"> <span class="checkmark"></span> 
+                        </label>
                     </div>
                 </div>
                 <div class="p-3 border-bottom">
@@ -30,10 +31,8 @@
         </div>
     </div>
 
-
-
     <div class="d-flex align-items-center pt-3">
-        <div id="prev"> <button class="btn btn-primary">Previous</button> </div>
-        <div class="ml-auto mr-sm-5"> <button class="btn btn-success">submit</button> </div>
+        <div id="prev"> <button class="btn btn-primary" (click)="back()">Back</button> </div>
+        <div class="ml-auto mr-sm-5"> <button class="btn btn-success" (click)="result()">submit</button> </div>
     </div>
 </div>

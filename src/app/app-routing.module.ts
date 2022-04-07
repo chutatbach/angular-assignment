@@ -30,11 +30,12 @@ const routes: Routes = [
   {
     path:"",
     component:HomeComponent,
+    canActivate: [AuthGuard],
     children:[
       {
         path:"mon-hoc",
         component:SubjectComponent,
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
       },
       {
         path:"quiz/:id",
@@ -86,7 +87,7 @@ const routes: Routes = [
         component:QuestionComponent
       },
       {
-        path:'cau-hoi/add',
+        path:'cau-hoi/:id/add',
         component:AddQuestionComponent
       }, {
         path:'cau-hoi/edit/:id',

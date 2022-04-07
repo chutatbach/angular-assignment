@@ -1,6 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthServicesService } from 'src/app/services/auth-services.service';
+import { StudentService } from 'src/app/services/student.service';
 import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
@@ -10,19 +12,101 @@ import { SubjectService } from 'src/app/services/subject.service';
 })
 export class QuizComponent implements OnInit {
 
-  constructor(private router: ActivatedRoute, private subjectCode: SubjectService) { }
+  constructor(private router: ActivatedRoute, private subjectSevice: SubjectService, private studentSevice: StudentService,private auth: AuthServicesService) { }
   code: any = 0;
   quiz: any = [];
+  sumAnswer: any = {};
+  saveScore: number = 0
+  profile: any = ''
+  userID: any = ''
+  save_index: any = 0;
+  data_put: any = ''
+  mili: number = 60
+
+
 
   ngOnInit(): void {
-    console.log(this.router)
+    console.log(this.auth.getdata)
     this.router.params.subscribe(par => {
       this.code = par['id'];
     })
-
-    this.subjectCode.getsubject_code(this.code)
+    this.getdata()
+    this.profile = JSON.parse(localStorage.getItem('login_user') || "{}")
+    this.studentSevice.google_id(this.profile.googleID)
       .subscribe(data => {
-        this.quiz = data
+        for (const key in data[0].marks) {
+          console.log(key)
+        }
+        this.data_put = data[0]
+        this.userID = data[0].id
       })
+
+    // het time updae point
+    setInterval(() => {
+      this.mili = this.mili - 1
+      if (this.mili == 0) {
+        this.prepare()
+      }
+    }, 1000)
+
+  }
+  getdata() {
+    this.subjectSevice.getsubject_code(this.code)
+      .subscribe(data => {
+        this.quiz = data.filter((val: any, index: any) => {
+          return index < 10
+        })
+      })
+  }
+  clickAnswer(idtrue: number, idCon: any) {
+    this.sumAnswer[idtrue] = idCon
+    let i = 0
+    for (const key in this.sumAnswer) {
+      console.log(this.sumAnswer[key])
+      if (key == this.sumAnswer[key]) {
+        i++
+      }
+    }
+    this.saveScore = i //tong diem
+    console.log(this.saveScore)
+  }
+  result() {
+    this.prepare()
+  }
+  prepare() {
+    let check = true;
+    console.log(this.data_put)
+    for (const key in this.data_put.marks) {
+      if (key == this.code) {
+        this.save_index = key
+        check = false
+      }
+    }
+    //true
+    if (check == true) {
+      this.save_index = this.code
+      this.add()
+    }
+    //false
+    else {
+      this.add()
+    }
+  }
+  add() {
+    this.data_put.marks[this.save_index] = this.saveScore
+    this.studentSevice.put_google(this.data_put, this.userID).subscribe(
+      data => {
+        alert('success');
+        window.location.href = `/quiz/${this.code}/ketqua`
+      }
+    )
+  }
+
+  back() {
+    window.location.href = '/mon-hoc'
+  }
+
+  isArray(obj: any) {
+    return Array.isArray(obj)
   }
 }

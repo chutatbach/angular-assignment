@@ -1,3 +1,4 @@
 function show() {
-    document.querySelector('.bach').innerHTML = "bach dep trai"
+    alert('abc')
+    document.querySelector('.bach-chu').innerHTML = "abc"
 }

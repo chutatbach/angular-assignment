@@ -13,6 +13,9 @@ export class SubjectService{
   getsubject_code(id = ''):Observable<any>{
     return this.http.get<any>(`${environment.baseURL}/${id}`)
   }
+  get_imgSubject(id = ''):Observable<any>{
+    return this.http.get<any>(`${environment.subject_api}?Code=${id}`)
+  }
   list(searchKeyword = ''):Observable<any>{
     return this.http.get<any>(`${environment.subject_api}?Name_like=${searchKeyword}`)
   }

@@ -1,52 +1,85 @@
-<!-- <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-    <input type="search" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="keyword" (keyup)="search()">
-</div> -->
-<div class="container mt-5">
-    <div class="d-flex justify-content-center row">
-        <div class="">
-            <div class="rounded" style="padding: 10px;    box-shadow: 5px 5px 5px 5px #00000061;">
-                <div class="table-responsive table-borderless">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-center">
-                                    <form action="">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="switchMain">
-                                            <label class="custom-control-label" for="switchMain">Toggle me</label>
-                                        </div>
-                                    </form>
-                                </th>
-                                <th>Question</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
+<div class="container parent">
 
-                        <tbody class="table-body" *ngIf="quiz.length > 0">
-                            <tr class="cell-1" *ngFor="let item of quiz">
-                                <td class="text-center">
-                                    <form action="">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="switch{{item.id}}">
-                                            <label class="custom-control-label" for="switch{{item.id}}">Toggle
-                                                me</label>
-                                        </div>
-                                    </form>
-                                </td>
-                                <td>{{item.Text}}</td>
-                                <!-- <td><i class="fa fa-ellipsis-h text-black-50"></i></td> -->
-                                <td><a href="http://localhost:4200/admin/sinh-vien/edit/{{item.id}}"
-                                        class="badge badge-info">Update</a></td>
-                                <td><span href="" class="badge badge-danger cursor-pointer">Delete</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div class="container child" [ngStyle]="{'opacity':style.opacity,'z-index':style.zindex}">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    {{AnswerPut|json}}
+                    <h5 class="card-title text-center">Answers</h5>
+                    <div class="btn btn-danger my-2" (click)="close()">Close</div>
+                    <div class="form-label-group"> <input type="text" class="form-control p-2"
+                            [(ngModel)]="AnswerPut.text" placeholder="Answers"></div>
+
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                        (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container child" [ngStyle]="{'opacity':style2.opacity,'z-index':style2.zindex}">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    {{QuestionPut|json}}
+                    <h5 class="card-title text-center">Question</h5>
+                    <div class="btn btn-danger my-2" (click)="close_question()">Close</div>
+                    <div class="form-label-group"> <input type="text" class="form-control p-2"
+                            [(ngModel)]="QuestionPut.text" placeholder="Question"></div>
+
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                        (click)="submit2()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="quiz.length > 0">
+        <div class="mx-5">
+            <div class="btn btn-danger text-white" routerLink="/admin/cau-hoi/{{code}}/add">
+                Add question
+            </div>
+        </div>
+        <div class="col-6" *ngFor="let item of quiz;let i = index">
+            <div class="container-fluid">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="">
+                                <h4>{{i}}. {{item.Text}}</h4>
+                                <span href="" class="mx-2 btn btn-danger cursor-pointer"
+                                    (click)="delete_question()">Delete</span>
+                                <span href="" class="mx-2 btn btn-info cursor-pointer text-white"
+                                    (click)="showput_question(item)">Update</span>
+                                <span href="" class="mx-2 btn btn-primary cursor-pointer"
+                                    (click)="create_show_asw()">Create answer</span>
+                            </div>
+                            <div class="update_question d-flex">
+                                <input type="text" class="form-control p-2" value="{{item.Text}}">
+                                <a href="http://localhost:4200/admin/sinh-vien/edit/{{item.id}}"
+                                    class="btn btn-info text-white">Update</a>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-xs-3 5"> </div>
+                            <div class="quiz" id="quiz" data-toggle="buttons" *ngFor="let child of item.Answers">
+                                <label class="element-animation1 btn btn-lg btn-danger btn-block"><span
+                                        class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                    {{child.Text}}
+                                    <div class="">
+                                        <div class="btn btn-info text-light" (click)="showup(child,item,i)">Update</div>
+                                        <div class="btn btn-light mx-3" (click)="delete_answer()">Delete</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- $(document).ready(function(){
 
