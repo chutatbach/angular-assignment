@@ -1,63 +1,114 @@
 <div class="container parent">
 
     <div class="container child" [ngStyle]="{'opacity':style.opacity,'z-index':style.zindex}">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    {{AnswerPut|json}}
-                    <h5 class="card-title text-center">Answers</h5>
+        <div class="w-75">
+            <div class="card card-signin my-3">
+                <div class="card-body overflow-scroll" style="height: 600px;">
+                    <h5 class="card-title text-center">{{roles}}</h5>
                     <div class="btn btn-danger my-2" (click)="close()">Close</div>
-                    <div class="form-label-group"> <input type="text" class="form-control p-2"
-                            [(ngModel)]="AnswerPut.text" placeholder="Answers"></div>
-
-                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
-                        (click)="submit()">Submit</button>
+                    <div class="btn btn-info m-2" >Thêm câu trả lời</div>
+                    <div class="add_element">
+                        <div class="elemented">
+                            <div class="form-label-group">
+                                <span>Câu hỏi:</span>
+                                <input type="text" class="form-control p-2" [(ngModel)]="data.Text"
+                                    placeholder="Question">
+                            </div>
+                            <div class="w-50" *ngFor="let val of data.Answers"
+                                style=" border: 1px solid black;padding: 5%;">
+                                <span>Trả lời:</span>
+                                <div class="form-label-group"> <input type="text" class="form-control p-2 my-3"
+                                        placeholder="Answers" [(ngModel)]="val.Text"></div>
+                                <div class="">
+                                    <div class="form-check">
+                                        <label class="form-check-label">True:</label>
+                                        <input type="radio" class="form-check-input mx-3" name="{{val.Id}}"
+                                            [(ngModel)]="val.Id">
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">False:</label>
+                                        <input type="radio" class="form-check-input mx-3" name="{{val.Id}}"
+                                            [(ngModel)]="val.Id">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase my-3"
+                        (click)="update(data)">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container child" [ngStyle]="{'opacity':style2.opacity,'z-index':style2.zindex}">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    {{QuestionPut|json}}
-                    <h5 class="card-title text-center">Question</h5>
-                    <div class="btn btn-danger my-2" (click)="close_question()">Close</div>
-                    <div class="form-label-group"> <input type="text" class="form-control p-2"
-                            [(ngModel)]="QuestionPut.text" placeholder="Question"></div>
+        <div class="w-75">
+            <div class="card card-signin my-3">
+                <div class="card-body overflow-scroll" style="height: 600px;">
+                    <h5 class="card-title text-center">{{roles}}</h5>
+                    <div class="btn btn-danger my-2" (click)="close2()">Đóng</div>
+                    <div class="btn btn-info m-2" (click)="addQuestion()">Thêm câu hỏi</div>
 
-                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
-                        (click)="submit2()">Submit</button>
+                    <div class="add_element" *ngFor="let val of dataput; let i = index">
+                        <div class="btn btn-info m-2" (click)="addChild(i)">Thêm câu trả lời</div>
+                        <div class="elemented">
+                            <div class="form-label-group">
+                                <span for="">Câu hỏi:</span>
+                                <input type="text" class="form-control p-2" [(ngModel)]="val.Text"
+                                    placeholder="Question">
+                            </div>
+                            <div class="w-50 my-1" *ngFor="let child of val.Answers; let a = index"
+                                style=" border: 1px solid black;padding: 5%;">
+                                <span for="">Trả lời:</span>
+                                <div class="form-label-group"> <input type="text" class="form-control p-2 my-1"
+                                        placeholder="Answers" [(ngModel)]="child.Text"></div>
+                                <div class="">
+                                    <div class="form-check">
+                                        <label class="form-check-label">True:</label>
+                                        <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}"
+                                            (change)="clickAnswer(i,1,a)">
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">False:</label>
+                                        <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}"
+                                            (change)="clickAnswer(i,2,a)">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase my-3"
+                        (click)="create(dataput)">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row" *ngIf="quiz.length > 0">
-        <div class="mx-5">
-            <div class="btn btn-danger text-white" routerLink="/admin/cau-hoi/{{code}}/add">
-                Add question
-            </div>
+    <div class="container-fluid p-4">
+        <div class="btn btn-danger text-white w-100 py-4 d-flex justify-content-center align-content-center"
+            (click)="showcreate()">
+            <h1>+</h1>
+            <div class="d-flex mx-3 align-items-center"><span>Thêm câu hỏi</span></div>
         </div>
-        <div class="col-6" *ngFor="let item of quiz;let i = index">
+    </div>
+
+
+    <div class="row" *ngIf="quiz.length > 0">
+        <div class="col-12" *ngFor="let item of quiz;let i = index">
             <div class="container-fluid">
-                <div class="modal-dialog">
+                <div class="">
                     <div class="modal-content">
                         <div class="modal-header">
                             <div class="">
                                 <h4>{{i}}. {{item.Text}}</h4>
                                 <span href="" class="mx-2 btn btn-danger cursor-pointer"
-                                    (click)="delete_question()">Delete</span>
+                                    (click)="delete_question(item,i)">Xóa</span>
                                 <span href="" class="mx-2 btn btn-info cursor-pointer text-white"
-                                    (click)="showput_question(item)">Update</span>
-                                <span href="" class="mx-2 btn btn-primary cursor-pointer"
-                                    (click)="create_show_asw()">Create answer</span>
+                                    (click)="showput(item,i)">Sửa</span>
                             </div>
                             <div class="update_question d-flex">
                                 <input type="text" class="form-control p-2" value="{{item.Text}}">
-                                <a href="http://localhost:4200/admin/sinh-vien/edit/{{item.id}}"
-                                    class="btn btn-info text-white">Update</a>
                             </div>
                         </div>
                         <div class="modal-body">
@@ -67,8 +118,8 @@
                                         class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
                                     {{child.Text}}
                                     <div class="">
-                                        <div class="btn btn-info text-light" (click)="showup(child,item,i)">Update</div>
-                                        <div class="btn btn-light mx-3" (click)="delete_answer()">Delete</div>
+                                        <div class="btn btn-light mx-3" (click)="delete_answer(item,child.Id)">Xóa
+                                        </div>
                                     </div>
                                 </label>
                             </div>
@@ -78,13 +129,5 @@
             </div>
         </div>
     </div>
+
 </div>
-
-
-<!-- $(document).ready(function(){
-
-    $('.toggle-btn').click(function() {
-    $(this).toggleClass('active').siblings().removeClass('active');
-    });
-    
-    }); -->

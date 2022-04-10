@@ -18,7 +18,7 @@
       ],
       "marks": {
         "ADTE": 3,
-        "ADAV": 4,
+        "ADAV": "5",
         "INMA": 0
       }
     },
@@ -190,102 +190,6 @@
         {
           "Id": 104121,
           "Text": "2"
-        }
-      ]
-    },
-    {
-      "id": 25107,
-      "Text": "Có mấy loại Service?",
-      "Marks": 1,
-      "AnswerId": 104121,
-      "Answers": [
-        {
-          "Id": 104118,
-          "Text": "ADDADAD"
-        },
-        {
-          "Id": 104119,
-          "Text": "fsdfdsf"
-        },
-        {
-          "Id": 104120,
-          "Text": "dfhg"
-        },
-        {
-          "Id": 104121,
-          "Text": "eqweq"
-        }
-      ]
-    },
-    {
-      "id": 25108,
-      "Text": "Khi nào phương thức ServiceConnection.onServiceConnected được gọi?",
-      "Marks": 1,
-      "AnswerId": 104126,
-      "Answers": [
-        {
-          "Id": 104126,
-          "Text": "Sau khi một thành phần gọi Context.startService()"
-        },
-        {
-          "Id": 104127,
-          "Text": "Sau khi một thành phần gọi Context.bindService()"
-        },
-        {
-          "Id": 104128,
-          "Text": "Sau khi BroadcastReceiver nhận một Intent được gửi bởi Service"
-        },
-        {
-          "Id": 104129,
-          "Text": "Khi một Service gọi Context.startActivity()"
-        }
-      ]
-    },
-    {
-      "id": 25109,
-      "Text": "Phương thức Service.stopSelf(int startId) có tham số kiểu int. Tham số này dùng để làm gì?",
-      "Marks": 1,
-      "AnswerId": 104132,
-      "Answers": [
-        {
-          "Id": 104130,
-          "Text": "Nếu startId khác 0, Service sẽ bị hủy một cách vô điều kiện"
-        },
-        {
-          "Id": 104131,
-          "Text": "Tham số miêu tả số miliseconds bị trì hoãn trước khi Service bị hủy"
-        },
-        {
-          "Id": 104132,
-          "Text": "Là start identifier gần nhất nhận được bởi lời gọi onStart(Intent, int)"
-        },
-        {
-          "Id": 104133,
-          "Text": "Được sử dụng để dừng Service nếu Service đang chạy trong process id với process id bằng giá trị startid"
-        }
-      ]
-    },
-    {
-      "id": 25110,
-      "Text": "Câu nào là đúng khi đề cập đến Service?",
-      "Marks": 1,
-      "AnswerId": 104137,
-      "Answers": [
-        {
-          "Id": 104134,
-          "Text": "Các ứng dụng khác nhau không thể truy cập đến các Service của chính nó"
-        },
-        {
-          "Id": 104135,
-          "Text": "Tất cả phương án đều đúng"
-        },
-        {
-          "Id": 104136,
-          "Text": "Lớp Service luôn luôn được truy cập bởi tất cả ứng dụng Android khác cài trên thiết bị"
-        },
-        {
-          "Id": 104137,
-          "Text": "Service có thể chạy nền vô hạn kể cả khi thành phần khởi tạo Service đã bị hủy"
         }
       ]
     },
@@ -1881,7 +1785,7 @@
       "Answers": [
         {
           "Id": 104396,
-          "Text": "Trang web của Google API Console"
+          "Text": "Trang web của Google API Console "
         },
         {
           "Id": 104397,
@@ -1914,10 +1818,6 @@
         {
           "Id": 104402,
           "Text": "Vào Eclipse, Preferences->Android->DDMS"
-        },
-        {
-          "Id": 104403,
-          "Text": "Vào Eclipse, Preferences->Android->NDK"
         }
       ]
     },
@@ -1929,19 +1829,15 @@
       "Answers": [
         {
           "Id": 104404,
-          "Text": "UserVoice SDK"
+          "Text": "UserVoice SDK dasdasd"
         },
         {
           "Id": 104405,
-          "Text": "OpenGL ES version 2"
+          "Text": "OpenGL ES version "
         },
         {
           "Id": 104406,
           "Text": "HttpClient"
-        },
-        {
-          "Id": 104407,
-          "Text": "Maven SDK"
         }
       ]
     }
@@ -3920,10 +3816,6 @@
         {
           "Id": 104116,
           "Text": "HTC"
-        },
-        {
-          "Id": 104117,
-          "Text": "Samsung"
         }
       ]
     }

@@ -1,0 +1,335 @@
+<div class="container parent">
+
+    <div class="container child" [ngStyle]="{'opacity':style.opacity,'z-index':style.zindex}">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    {{AnswerPut|json}}
+                    <h5 class="card-title text-center">{{active}} Answers</h5>
+                    <div class="btn btn-danger my-2" (click)="close()">Close</div>
+                    <div class="btn btn-info mx-2 btn_click" (click)="add_elm()">
+                        add
+                    </div>
+                    <div class="add_element">
+                        <div class="elemented">
+                            <div class="form-label-group"> <input type="text" class="form-control p-2"
+                                    [(ngModel)]="AnswerPut.text[0]" placeholder="Answers"></div>
+                            <div class="">
+                                <div class="form-label-group" *ngIf="active_show == true">
+                                    True:
+                                    <input type="radio" class="" name="1" [value]="add_check[0]">
+                                    False:
+                                    <input type="radio" class="" name="1" [value]="add_check[1]">
+                                </div>
+                            </div>
+                        </div>
+                        {{add}}
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                        (click)="update()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container child" [ngStyle]="{'opacity':style2.opacity,'z-index':style2.zindex}">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    {{QuestionPut|json}}
+                    <h5 class="card-title text-center">{{active}} Question</h5>
+                    <div class="btn btn-danger my-2" (click)="close2()">Close</div>
+                    <div class="form-label-group"> <input type="text" class="form-control p-2"
+                            [(ngModel)]="QuestionPut.text" placeholder="Question"></div>
+
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                        (click)="update2()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="quiz.length > 0">
+        <div class="mx-5">
+            <div class="btn btn-danger text-white" (click)="create_show_question()">
+                Add question
+            </div>
+        </div>
+        <div class="col-6" *ngFor="let item of quiz;let i = index">
+            <div class="container-fluid">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="">
+                                <h4>{{i}}. {{item.Text}}</h4>
+                                <span href="" class="mx-2 btn btn-danger cursor-pointer"
+                                    (click)="delete_question(item,i)">Delete</span>
+                                <span href="" class="mx-2 btn btn-info cursor-pointer text-white"
+                                    (click)="showput_question(item,i)">Update</span>
+                                <span href="" class="mx-2 btn btn-primary cursor-pointer"
+                                    (click)="create_show_asw()">Create answer</span>
+                            </div>
+                            <div class="update_question d-flex">
+                                <input type="text" class="form-control p-2" value="{{item.Text}}">
+                                <a href="http://localhost:4200/admin/sinh-vien/edit/{{item.id}}"
+                                    class="btn btn-info text-white">Update</a>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-xs-3 5"> </div>
+                            <div class="quiz" id="quiz" data-toggle="buttons" *ngFor="let child of item.Answers">
+                                <label class="element-animation1 btn btn-lg btn-danger btn-block"><span
+                                        class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                    {{child.Text}}
+                                    <div class="">
+                                        <div class="btn btn-info text-light" (click)="showup(child,item,i)">Update</div>
+                                        <div class="btn btn-light mx-3" (click)="delete_answer(item,child.Id)">Delete
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { QuestionService } from 'src/app/services/question.service';
+import { SubjectService } from 'src/app/services/subject.service';
+
+declare var object_add: any; //<-- drag function in js put inside component
+
+@Component({
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.css']
+})
+export class QuestionComponent implements OnInit {
+
+  code: any = 0;
+  quiz: any = [];
+  active: any = '';
+  active_show = false;
+  //---------------
+  check: any = true;
+  check2: any = true;
+  //---------------
+  style: any = {
+    index: '',
+    opacity: ''
+  }
+  style2: any = {
+    index: '',
+    opacity: ''
+  }
+  //---------------
+  AnswerPut: any = {
+    id_parent: '',
+    text: '',
+    index: ''
+  }
+  QuestionPut: any = {
+    id: '',
+    text: '',
+  }
+  //---------------
+  questionnew: any = {
+    Text: "",
+    Marks: 1,
+    AnswerId: "",
+    Answers: []
+  }
+  //---------------
+  saveup: any = ''
+  saveup_question: any = ''
+  save_index: any
+  //----------------
+  add_check: any = [true, false]
+  constructor(private router: ActivatedRoute, private subjectSevice: SubjectService, private question: QuestionService) { }
+  ngOnInit(): void {
+    this.router.params.subscribe(par => {
+      this.code = par['id'];
+    })
+    this.subjectSevice.getsubject_code(this.code).subscribe(data => {
+      data.reverse()
+      this.quiz = [...data]
+    })
+  }
+  //--------------------------------------------------------
+  showup(answer: any, question: any, i: any) {
+    this.active = 'Update'
+    //save cac gia tri de update
+    this.show()
+    this.AnswerPut.id_parent = question.id
+    this.save_index = i
+    this.AnswerPut.text = answer.Text
+    //show 
+    this.question.list_id(this.code, question.id).subscribe(data => {
+      console.log(data)
+      console.log(answer.Id)
+      data.Answers.forEach((val: any, index: any) => {
+        if (answer.Id == val.Id) {
+          this.AnswerPut.index = index
+          this.saveup = data
+          console.log(this.AnswerPut.index)
+        }
+      });
+    })
+    this.active_show = false
+  }
+  showput_question(question: any, index: any) {
+    this.active = 'Update'
+    this.show2()
+    this.saveup = question
+    this.QuestionPut.id = question.id
+    this.QuestionPut.text = question.Text
+    console.log(this.saveup)
+    this.save_index = index
+    this.active_show = false
+  }
+  //----------------------------------------------------
+  update() {
+    //update
+    if (this.AnswerPut.index != null) {
+      this.saveup.Answers[this.AnswerPut.index].Text = this.AnswerPut.text
+      this.question.put(this.code, this.AnswerPut.id_parent, this.saveup).subscribe(data => {
+        this.quiz[this.save_index] = { ...data }
+        this.close()
+      }) //de update duoc phai co mon hoc va id cau hoi va data da duoc update lai
+    }
+    //create
+    else {
+      this.create2()
+    }
+  }
+  update2() {
+    //update
+    if (this.QuestionPut.id != '') {
+      this.saveup.Text = this.QuestionPut.text
+      console.log(this.saveup)
+      this.question.put(this.code, this.QuestionPut.id, this.saveup).subscribe(data => {
+        this.quiz[this.save_index] = { ...data }
+        this.close2()
+      }) //de update duoc phai co mon hoc va id cau hoi va data da duoc update lai
+    }
+    //create
+    else {
+      this.create1()
+      this.close2()
+    }
+  }
+  //-----------------------------------------------
+  create_show_asw() {
+    this.show()
+    this.AnswerPut = {
+      id_parent: '',
+      text: [],
+      index: ''
+    }
+    this.active = 'Create'
+    this.active_show = true
+  }
+  create_show_question() {
+    this.active = 'Create'
+    this.show2()
+    this.QuestionPut = {
+      id: '',
+      text: '',
+    }
+    this.active_show = false
+  }
+  //--------------------------------------------
+  create1() {
+    this.questionnew.Text = this.QuestionPut.text
+    this.questionnew.AnswerId = Math.floor(Math.random() * (110000 - 100000)) + 100000
+    console.log(this.questionnew)
+    this.question.create(this.code, this.questionnew).subscribe((data) => {
+      this.quiz.unshift({ ...data })
+    })
+  }
+  create2() {
+  }
+  //---------------------------------------------
+  delete_answer(item: any, id: any) {
+    if (confirm('ban muon xoa') == true) {
+      console.log(item, id)
+      console.log(item.id)
+      item.Answers = item.Answers.filter((val: any) => {
+        return val.Id != id
+      })
+
+      this.question.put(this.code, item.id, item).subscribe((data: any) => {
+        console.log(data)
+        this.quiz[item.id] = { ...data }
+      })
+    }
+  }
+  delete_question(item: any, index: any) {
+    if (confirm('ban muon xoa') == true) {
+      console.log(item)
+      this.question.delete(this.code, item.id).subscribe(data => {
+        this.quiz[index] = { ...data }
+      })
+    }
+  }
+  //-----------------------------------------------------------
+  close() {
+    if (this.check == false) {
+      this.style.opacity = 0
+      this.style.zindex = -1
+      this.check = true
+    }
+  }
+  show() {
+    if (this.check == true) {
+      this.style.opacity = 1
+      this.style.zindex = 99
+      this.check = false
+    }
+  }
+  close2() {
+    if (this.check2 == false) {
+      this.style2.opacity = 0
+      this.style2.zindex = -1
+      this.check2 = true
+    }
+  }
+  show2() {
+    if (this.check2 == true) {
+      this.style2.opacity = 1
+      this.style2.zindex = 99
+      this.check2 = false
+    }
+  }
+  add = ``
+  add_elm() {
+    //  object_add.add()
+    this.add = `<div class="elemented">
+    <div class="form-label-group"> <input type="text" class="form-control p-2"
+            [(ngModel)]="AnswerPut.text[0]" placeholder="Answers"></div>
+    <div class="">
+        <div class="form-label-group" *ngIf="active_show == true">
+            True:
+            <input type="radio" class="" name="1" [value]="add_check[0]">
+            False:
+            <input type="radio" class="" name="1" [value]="add_check[1]">
+        </div>
+    </div>
+  </div>`
+  }
+}

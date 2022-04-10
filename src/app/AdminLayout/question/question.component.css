@@ -210,22 +210,21 @@ label .glyphicon {
     color: white;
     background-color: #3b5998
 }
-.parent{
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
 .child{
-    position: absolute;
+  
+    width:100%;
+    position: fixed;
+    top: 1%;
     opacity: 0;
     z-index: -1;
     transition: 0.3s;
-}
-.modal-header{
-    position: relative;
 }
 .update_question{
     position: absolute;
     opacity: 0;
     z-index: -99;
+}
+.add_element{
+    border: 1px solid black;
+    padding: 5%;
 }

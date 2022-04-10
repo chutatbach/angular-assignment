@@ -12,11 +12,11 @@ import { SubjectService } from 'src/app/services/subject.service';
 })
 export class QuizComponent implements OnInit {
 
-  constructor(private router: ActivatedRoute, private subjectSevice: SubjectService, private studentSevice: StudentService,private auth: AuthServicesService) { }
+  constructor(private router: ActivatedRoute, private subjectSevice: SubjectService, private studentSevice: StudentService, private auth: AuthServicesService) { }
   code: any = 0;
   quiz: any = [];
   sumAnswer: any = {};
-  saveScore: number = 0
+  saveScore: any = 0
   profile: any = ''
   userID: any = ''
   save_index: any = 0;
@@ -53,8 +53,9 @@ export class QuizComponent implements OnInit {
   getdata() {
     this.subjectSevice.getsubject_code(this.code)
       .subscribe(data => {
+        data.sort(() => Math.random() - 0.5)
         this.quiz = data.filter((val: any, index: any) => {
-          return index < 10
+          return index && index < 11
         })
       })
   }
@@ -67,7 +68,7 @@ export class QuizComponent implements OnInit {
         i++
       }
     }
-    this.saveScore = i //tong diem
+    this.saveScore = i.toFixed() //tong diem
     console.log(this.saveScore)
   }
   result() {
@@ -75,7 +76,6 @@ export class QuizComponent implements OnInit {
   }
   prepare() {
     let check = true;
-    console.log(this.data_put)
     for (const key in this.data_put.marks) {
       if (key == this.code) {
         this.save_index = key

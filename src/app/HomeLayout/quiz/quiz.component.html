@@ -21,7 +21,7 @@
                     <div class="py-2 h5"><b>{{i + 1}}. {{item.Text}}?</b></div>
                     <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
                         <label class="options" *ngFor="let itemChild of item.Answers ">{{itemChild.Text}} 
-                            <input type="radio" [name]="item.Id" [value]="itemChild.Id" (change)="clickAnswer(item.AnswerId,itemChild.Id)"> <span class="checkmark"></span> 
+                            <input type="radio" [name]="item.id" [value]="itemChild.Id" (change)="clickAnswer(item.AnswerId,itemChild.Id)"> <span class="checkmark"></span> 
                         </label>
                     </div>
                 </div>

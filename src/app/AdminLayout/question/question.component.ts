@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
 import { SubjectService } from 'src/app/services/subject.service';
 
+declare var object_add: any; //<-- drag function in js put inside component
+
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -13,8 +15,114 @@ export class QuestionComponent implements OnInit {
 
   code: any = 0;
   quiz: any = [];
-  check: any = true;
-  check2: any = true;
+  data: any = {
+    id: '',
+    Text: '',
+    Marks: '',
+    AnswerId: '',
+    Answers: [
+      {
+        Id: '',
+        Text: ''
+      },
+    ]
+  }
+  dataput: any = [
+    {
+      Text: '',
+      Marks: '',
+      AnswerId: 1,
+      Answers: [
+        {
+          Id: '',
+          Text: ''
+        },
+      ]
+    }
+  ]
+  constructor(private router: ActivatedRoute, private subjectSevice: SubjectService, private question: QuestionService) { }
+  ngOnInit(): void {
+    this.router.params.subscribe(par => {
+      this.code = par['id'];
+    })
+    this.subjectSevice.getsubject_code(this.code).subscribe(data => {
+      data.reverse()
+      this.quiz = [...data]
+    })
+  }
+  //-------------------------show data update--------------------------------------
+  index_question: any = ''
+  roles = ''
+  showput(question: any, index: any) {
+    this.roles = 'Cập nhật câu hỏi'
+    this.show()
+    this.data = { ...question }
+    this.index_question = index
+  }
+  valTrue: any = 0
+  idFalse: any = 0
+  showcreate() {
+    this.roles = 'Thêm câu hỏi'
+    this.show2()
+  }
+  //-----------------------------------------------------
+  addQuestion() {
+    this.dataput.push({
+      Text: '',
+      Marks: '',
+      AnswerId: 1,
+      Answers: [
+        {
+          Id: '',
+          Text: ''
+        },
+      ]
+    })
+  }
+  addChild(index: any) {
+    this.dataput[index].Answers.push({
+      Id: '',
+      Text: ''
+    })
+  }
+  clickAnswer(id:any,check:any,index:any){
+    this.dataput[id].Answers[index].Id = check
+  }
+  create(data: any) {
+    data.forEach((val:any) => {
+      this.question.create(this.code,val).subscribe((data)=> {
+        this.quiz.push(data)
+        alert('ban them thanh cong')
+        this.close()
+      })
+    });
+  }
+  //----------------------------update---------------------------------
+  update(data: any) {
+    this.question.put(this.code, data.id, data).subscribe(data => {
+      this.quiz[this.index_question] = { ...data }
+      this.close()
+    })
+  }
+  //-----------------------------delete---------------------------------------
+  delete_answer(item: any, id: any) {
+    if (confirm('ban muon xoa') == true) {
+      item.Answers = item.Answers.filter((val: any) => {
+        return val.Id != id
+      })
+      this.question.put(this.code, item.id, item).subscribe((data: any) => {
+        this.quiz[item.id] = { ...data }
+      })
+    }
+  }
+  delete_question(item: any, index: any) {
+    if (confirm('ban muon xoa') == true) {
+      this.question.delete(this.code, item.id).subscribe(data => {
+        this.quiz[index] = { ...data }
+      })
+    }
+  }
+  //--------------------------style---------------------------------
   style: any = {
     index: '',
     opacity: ''
@@ -23,97 +131,8 @@ export class QuestionComponent implements OnInit {
     index: '',
     opacity: ''
   }
-  AnswerPut: any = {
-    id_parent: '',
-    id_children: '',
-    text: '',
-    index: ''
-  }
-  QuestionPut: any = {
-    id: '',
-    text: '',
-  }
-
-  saveup: any = ''
-  saveup_question: any = ''
-  save_index: any 
-  constructor(private router: ActivatedRoute, private subjectSevice: SubjectService, private question: QuestionService) { }
-  ngOnInit(): void {
-    this.router.params.subscribe(par => {
-      this.code = par['id'];
-    })
-
-    this.subjectSevice.getsubject_code(this.code).subscribe(data => {
-      data = data.filter((val: any, index: any) => { return index < 10 })
-      this.quiz = [...data]
-    })
-  }
-  showup(answer: any, question: any, i: any) {
-    //save cac gia tri de update
-    this.show()
-    this.AnswerPut.id_parent = question.id
-    this.save_index = i
-    this.AnswerPut.text = answer.Text
-    console.log(answer, question)
-    //show 
-    this.question.list_id(this.code, question.id).subscribe(data => {
-      data.Answers.forEach((val: any, index: any) => {
-        if (answer.Id == val.Id) {
-          this.AnswerPut.index = index
-          this.saveup = data
-        }
-      });
-    })
-  }
-  submit() {
-    this.saveup.Answers[this.AnswerPut.index].Text = this.AnswerPut.text
-    this.question.put(this.code, this.AnswerPut.id_parent, this.saveup).subscribe(data => {
-      this.quiz[this.save_index] = { ...data }
-      this.close()
-    }) //de update duoc phai co mon hoc va id cau hoi va data da duoc update lai
-  }
-  delete_answer() {
-    if (confirm('ban muon xoa') == true) {
-
-    } else {
-
-    }
-  }
-  create_show_asw() {
-    this.show()
-    this.AnswerPut = {
-      id_parent: '',
-      id_children: '',
-      text: '',
-      index: ''
-    }
-  }
-  delete_question() {
-    if (confirm('ban muon xoa') == true) {
-
-    } else {
-
-    }
-  }
-  showput_question(question: any) {
-    this.show2()
-    console.log(question)
-    this.saveup_question = question
-    this.QuestionPut.id = question.id
-    this.QuestionPut.text = question.Text
-    console.log(this.saveup_question)
-    this.saveup_question.Text = this.QuestionPut.text
-    this.update_question()
-  }
-  update_question(){
-    console.log(this.QuestionPut.text)
-  }
-  submit2(){
-    console.log(this.QuestionPut.text)
-  }
-  close_question() {
-    this.close2()
-  }
+  check: any = true;
+  check2: any = true;
   close() {
     if (this.check == false) {
       this.style.opacity = 0
@@ -142,6 +161,4 @@ export class QuestionComponent implements OnInit {
       this.check2 = false
     }
   }
-
-
 }
