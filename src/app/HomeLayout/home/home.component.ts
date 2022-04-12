@@ -28,13 +28,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     var profile: any = JSON.parse(localStorage.getItem('login_user') || "{}")
     // console.log(profile.googleID)
-
     this.google.google_id(profile.googleID)
       .subscribe(data => {
         this.user = { ...data[0] }
       })
-
-
     // click_img()
   }
   dropdown() {

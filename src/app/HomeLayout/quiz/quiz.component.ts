@@ -21,7 +21,7 @@ export class QuizComponent implements OnInit {
   userID: any = ''
   save_index: any = 0;
   data_put: any = ''
-  mili: number = 60
+  mili: number = 5000
 
 
 

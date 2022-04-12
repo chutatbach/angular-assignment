@@ -1,41 +1,56 @@
+<div id="toast"></div>
 <div class="container parent">
-
     <div class="container child" [ngStyle]="{'opacity':style.opacity,'z-index':style.zindex}">
         <div class="w-75">
+
             <div class="card card-signin my-3">
                 <div class="card-body overflow-scroll" style="height: 600px;">
-                    <h5 class="card-title text-center">{{roles}}</h5>
-                    <div class="btn btn-danger my-2" (click)="close()">Close</div>
-                    <div class="btn btn-info m-2" >Thêm câu trả lời</div>
-                    <div class="add_element">
-                        <div class="elemented">
-                            <div class="form-label-group">
-                                <span>Câu hỏi:</span>
-                                <input type="text" class="form-control p-2" [(ngModel)]="data.Text"
-                                    placeholder="Question">
-                            </div>
-                            <div class="w-50" *ngFor="let val of data.Answers"
-                                style=" border: 1px solid black;padding: 5%;">
-                                <span>Trả lời:</span>
-                                <div class="form-label-group"> <input type="text" class="form-control p-2 my-3"
-                                        placeholder="Answers" [(ngModel)]="val.Text"></div>
-                                <div class="">
-                                    <div class="form-check">
-                                        <label class="form-check-label">True:</label>
-                                        <input type="radio" class="form-check-input mx-3" name="{{val.Id}}"
-                                            [(ngModel)]="val.Id">
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">False:</label>
-                                        <input type="radio" class="form-check-input mx-3" name="{{val.Id}}"
-                                            [(ngModel)]="val.Id">
+                    <form action="" [formGroup]="questionform">
+                        <h5 class="card-title text-center">{{roles}}</h5>
+                        <div class="btn btn-danger my-2" (click)="close()">Close</div>
+                        <div class="btn btn-info m-2" (click)="addChild_put()">Thêm câu trả lời</div>
+                        <div class="add_element">
+
+                            <div class="elemented">
+                                <div class="form-label-group">
+                                    <h4 for="" class="">Câu hỏi:</h4>
+                                    <input type="text" class="form-control p-2" [value]="questionform.value.Text"
+                                        formControlName="Text" placeholder="Question">
+                                </div>
+                                {{Answers.value|json}}
+                                <div class="" formArrayName="Answers" *ngFor="let val of Answers.controls;index as i">
+                                    <div class="w-50 m-1"
+                                        style=" border: 1px solid rgb(133, 133, 133);padding: 5%;border-radius: 40px;">
+
+                                        <div class="" [formGroupName]="i">
+                                            <h4 for="" class="">Trả lời:</h4>
+
+                                            <div class="form-label-group"> <input type="text"
+                                                    class="form-control p-2 my-3" placeholder="Answers"
+                                                    formControlName="Text" [value]="val.get('Text')?.value"></div>
+                                            <div class="">
+                                                <div class="form-check">
+                                                    <label class="form-check-label">True:</label>
+                                                    <input type="radio" class="form-check-input mx-3"
+                                                        value="{{questionform.value.AnswerId}}"
+                                                        name="{{val.get('Id')?.value}}"
+                                                        [checked]="val.get('Id')?.value == questionform.value.AnswerId? true:false">
+                                                </div>
+                                                <div class="form-check">
+                                                    <label class="form-check-label">False:</label>
+                                                    <input type="radio" class="form-check-input mx-3"
+                                                        value="{{val.get('Id')?.value}}" name="{{val.get('Id')?.value}}"
+                                                        [checked]="val.get('Id')?.value != questionform.value.AnswerId? true:false">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block text-uppercase my-3"
-                        (click)="update(data)">Submit</button>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase my-3" type="submit"
+                            (click)="update()">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -51,35 +66,38 @@
 
                     <div class="add_element" *ngFor="let val of dataput; let i = index">
                         <div class="btn btn-info m-2" (click)="addChild(i)">Thêm câu trả lời</div>
+                        <span class="btn btn-danger" (click)="delquestion(val)">Xóa</span>
                         <div class="elemented">
                             <div class="form-label-group">
-                                <span for="">Câu hỏi:</span>
+                                <h4 for="" class="">Câu hỏi:</h4>
                                 <input type="text" class="form-control p-2" [(ngModel)]="val.Text"
                                     placeholder="Question">
                             </div>
-                            <div class="w-50 my-1" *ngFor="let child of val.Answers; let a = index"
-                                style=" border: 1px solid black;padding: 5%;">
-                                <span for="">Trả lời:</span>
+                            <div class="w-50 m-1" *ngFor="let child of val.Answers; let a = index"
+                                style=" border: 1px solid rgb(109, 109, 109);padding: 5%;border-radius: 40px;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4 for="" class="">Trả lời:</h4>
+                                    <span class="btn btn-danger" (click)="delasw(val)">Xóa</span>
+                                </div>
                                 <div class="form-label-group"> <input type="text" class="form-control p-2 my-1"
                                         placeholder="Answers" [(ngModel)]="child.Text"></div>
                                 <div class="">
                                     <div class="form-check">
                                         <label class="form-check-label">True:</label>
                                         <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}"
-                                            (change)="clickAnswer(i,1,a)">
+                                            (change)="clickAnswer(i,val.AnswerId,a)">
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">False:</label>
-                                        <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}"
-                                            (change)="clickAnswer(i,2,a)">
+                                        <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}" checked
+                                            (change)="clickAnswer(i,random(),a)">
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <button class="btn btn-lg btn-primary btn-block text-uppercase my-3"
-                        (click)="create(dataput)">Update</button>
+                        (click)="create(dataput)">Create</button>
                 </div>
             </div>
         </div>
@@ -113,7 +131,8 @@
                         </div>
                         <div class="modal-body">
                             <div class="col-xs-3 5"> </div>
-                            <div class="quiz" id="quiz" data-toggle="buttons" *ngFor="let child of item.Answers">
+                            <div class="quiz" id="quiz" data-toggle="buttons"
+                                *ngFor="let child of item.Answers let i as index">
                                 <label class="element-animation1 btn btn-lg btn-danger btn-block"><span
                                         class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
                                     {{child.Text}}

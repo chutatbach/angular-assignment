@@ -5,6 +5,7 @@
       "fullname": "Chu tất bách PH 1 6 0 4 9",
       "email": "bachctph16049@fpt.edu.vn",
       "googleID": "105787631730744373026",
+      "pass": "",
       "avatar": "https://lh3.googleusercontent.com/a-/AOh14GjdcmB3r_dGmuHpBmDQ31inYu_ewgR-RgsV0Xj7gQ=s96-c",
       "gender": "true",
       "birthday": "1995-12-21",
@@ -18,7 +19,7 @@
       ],
       "marks": {
         "ADTE": 3,
-        "ADAV": "5",
+        "ADAV": "4",
         "INMA": 0
       }
     },
@@ -27,6 +28,7 @@
       "fullname": "bách cpa",
       "email": "chutatbach9@gmail.com",
       "googleID": "101792691848254157151",
+      "pass": "",
       "avatar": "https://lh3.googleusercontent.com/a-/AOh14GhWlSEs_j8DLc17zTdorj2FWcQuV9e8hVIGHN-7Qg=s96-c",
       "gender": "false",
       "birthday": "1995-12-21",
@@ -38,6 +40,20 @@
       "marks": {
         "ADAV": 4
       }
+    },
+    {
+      "fullname": "bach dep trai 222",
+      "email": "dasdasd@gmail.com",
+      "pass": "123",
+      "avatar": "https://vignette.wikia.nocookie.net/rocklee/images/3/36/Naruto_Uzumaki.png/revision/latest?cb=20141114214806&path-prefix=pt-br",
+      "gender": "true",
+      "birthday": "2022-04-14",
+      "roles": [
+        {
+          "name": "admin"
+        }
+      ],
+      "id": 3
     }
   ],
   "subjects": [
@@ -1761,7 +1777,7 @@
       "Answers": [
         {
           "Id": 104392,
-          "Text": "android.permission.CHANGE_CONFIGURATION"
+          "Text": "android.permission.CHANGE_sadasdCONFIGURATION"
         },
         {
           "Id": 104393,
@@ -1770,34 +1786,6 @@
         {
           "Id": 104394,
           "Text": "android.permission.WRITE_EXTERNAL_STORAGE"
-        },
-        {
-          "Id": 104395,
-          "Text": "android.permission.INTERNET"
-        }
-      ]
-    },
-    {
-      "id": 25180,
-      "Text": "Để nhận API key cho phép hiển thị map trong ứng dụng, trang nào được sử dụng để nhận API key?",
-      "Marks": 1,
-      "AnswerId": 104396,
-      "Answers": [
-        {
-          "Id": 104396,
-          "Text": "Trang web của Google API Console "
-        },
-        {
-          "Id": 104397,
-          "Text": "Trang chủ Microsoft"
-        },
-        {
-          "Id": 104398,
-          "Text": "Trang chủ Google"
-        },
-        {
-          "Id": 104399,
-          "Text": "Trang trủ Apple"
         }
       ]
     },
@@ -1809,7 +1797,7 @@
       "Answers": [
         {
           "Id": 104400,
-          "Text": "Không có cách nào để biết được đường dẫn debug keystore"
+          "Text": "Không có cách nàfdgdfgdgo để biết được đường dẫn debug keystore"
         },
         {
           "Id": 104401,
@@ -1818,26 +1806,14 @@
         {
           "Id": 104402,
           "Text": "Vào Eclipse, Preferences->Android->DDMS"
-        }
-      ]
-    },
-    {
-      "id": 25182,
-      "Text": "Google Map Android API đòi hỏi thư viện nào để hiển thị Map?",
-      "Marks": 1,
-      "AnswerId": 104405,
-      "Answers": [
-        {
-          "Id": 104404,
-          "Text": "UserVoice SDK dasdasd"
         },
         {
-          "Id": 104405,
-          "Text": "OpenGL ES version "
+          "Id": "",
+          "Text": "qưewqewqe"
         },
         {
-          "Id": 104406,
-          "Text": "HttpClient"
+          "Id": 103269,
+          "Text": "sdsadasd"
         }
       ]
     }
@@ -21286,10 +21262,6 @@
         {
           "Id": 102845,
           "Text": "Cookies và XML"
-        },
-        {
-          "Id": 102846,
-          "Text": "Java Scripts và XML"
         }
       ]
     }

@@ -28,6 +28,7 @@ import { AddQuestionComponent } from './AdminLayout/add-question/add-question.co
 import { EditQuestionComponent } from './AdminLayout/edit-question/edit-question.component';
 import { SubjectAdminComponent } from './AdminLayout/subject-admin/subject-admin.component';
 import { DashboardComponent } from './AdminLayout/dashboard/dashboard.component';
+import { HeaderComponent } from './HomeLayout/header/header.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { DashboardComponent } from './AdminLayout/dashboard/dashboard.component'
     EditQuestionComponent,
     SubjectAdminComponent,
     DashboardComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

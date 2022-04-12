@@ -1,10 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
 import { SubjectService } from 'src/app/services/subject.service';
 
-declare var object_add: any; //<-- drag function in js put inside component
+declare var showSuccessToast: any; //<-- drag function in js put inside component
 
 @Component({
   selector: 'app-question',
@@ -15,31 +16,6 @@ export class QuestionComponent implements OnInit {
 
   code: any = 0;
   quiz: any = [];
-  data: any = {
-    id: '',
-    Text: '',
-    Marks: '',
-    AnswerId: '',
-    Answers: [
-      {
-        Id: '',
-        Text: ''
-      },
-    ]
-  }
-  dataput: any = [
-    {
-      Text: '',
-      Marks: '',
-      AnswerId: 1,
-      Answers: [
-        {
-          Id: '',
-          Text: ''
-        },
-      ]
-    }
-  ]
   constructor(private router: ActivatedRoute, private subjectSevice: SubjectService, private question: QuestionService) { }
   ngOnInit(): void {
     this.router.params.subscribe(par => {
@@ -50,27 +26,29 @@ export class QuestionComponent implements OnInit {
       this.quiz = [...data]
     })
   }
-  //-------------------------show data update--------------------------------------
-  index_question: any = ''
-  roles = ''
-  showput(question: any, index: any) {
-    this.roles = 'Cập nhật câu hỏi'
-    this.show()
-    this.data = { ...question }
-    this.index_question = index
-  }
-  valTrue: any = 0
-  idFalse: any = 0
+  //--------------------------------------------------------------
+  dataput: any = [
+    {
+      Text: '',
+      Marks: '',
+      AnswerId: this.random(),
+      Answers: [
+        {
+          Id: '',
+          Text: ''
+        },
+      ]
+    }
+  ]
   showcreate() {
     this.roles = 'Thêm câu hỏi'
     this.show2()
   }
-  //-----------------------------------------------------
   addQuestion() {
     this.dataput.push({
       Text: '',
       Marks: '',
-      AnswerId: 1,
+      AnswerId: this.random(),
       Answers: [
         {
           Id: '',
@@ -85,24 +63,59 @@ export class QuestionComponent implements OnInit {
       Text: ''
     })
   }
-  clickAnswer(id:any,check:any,index:any){
+  clickAnswer(id: any, check: any, index: any) {
     this.dataput[id].Answers[index].Id = check
+    console.log(this.dataput)
   }
   create(data: any) {
-    data.forEach((val:any) => {
-      this.question.create(this.code,val).subscribe((data)=> {
+    data.forEach((val: any) => {
+      this.question.create(this.code, val).subscribe((data) => {
         this.quiz.push(data)
-        alert('ban them thanh cong')
-        this.close()
       })
     });
+    alert('ban them thanh cong')
+    this.close()
   }
   //----------------------------update---------------------------------
-  update(data: any) {
-    this.question.put(this.code, data.id, data).subscribe(data => {
+  questionform: any = new FormGroup({
+    id: new FormControl(),
+    Text: new FormControl(),
+    Marks: new FormControl(1),
+    AnswerId: new FormControl(),
+    Answers: new FormArray([
+    ]),
+  })
+  index_question: any = ''
+  roles = ''
+  get Answers(){
+    return this.questionform.get('Answers') as FormArray
+  }
+  showput(question: any, index: any) {
+    this.roles = 'Cập nhật câu hỏi'
+    this.show()
+    this.questionform = new FormGroup({
+      id: new FormControl(question.id),
+      Text: new FormControl(question.Text),
+      Marks: new FormControl(1),
+      AnswerId: new FormControl(question.AnswerId),
+      Answers: new FormArray([
+      ]),
+    })
+    for (const val of question.Answers) {
+      this.Answers.push(new FormGroup({ Id: new FormControl(val.Id), Text: new FormControl(val.Text) }))
+    }
+    this.index_question = index
+    console.log(this.Answers)
+  }
+  addChild_put() {
+    this.Answers.push(new FormGroup({ Id: new FormControl(this.random()), Text: new FormControl('') }))
+  }
+  update() {
+    this.question.put(this.code, this.questionform.value.id, this.questionform.value).subscribe(data => {
       this.quiz[this.index_question] = { ...data }
       this.close()
     })
+    new showSuccessToast()
   }
   //-----------------------------delete---------------------------------------
   delete_answer(item: any, id: any) {
@@ -111,7 +124,6 @@ export class QuestionComponent implements OnInit {
         return val.Id != id
       })
       this.question.put(this.code, item.id, item).subscribe((data: any) => {
-        this.quiz[item.id] = { ...data }
       })
     }
   }
@@ -160,5 +172,21 @@ export class QuestionComponent implements OnInit {
       this.style2.zindex = 99
       this.check2 = false
     }
+  }
+  random() {
+    let a = Math.floor(Math.random() * (110000 - 100000)) + 100000
+    return a
+  }
+  delasw(i: any) {
+    this.dataput = this.dataput.Answers.filter((data: any, index: any) => {
+      return data[index] != data[i]
+    })
+  }
+  delquestion(i: any) {
+    console.log(this.dataput)
+    this.dataput = this.dataput.filter((data: any) => {
+      return data.AnswerId != i.AnswerId
+    })
+    console.log(i)
   }
 }

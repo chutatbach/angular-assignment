@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 import { StudentService } from 'src/app/services/student.service';
 
 @Component({
@@ -8,6 +9,16 @@ import { StudentService } from 'src/app/services/student.service';
   styleUrls: ['./edit-student.component.css']
 })
 export class EditStudentComponent implements OnInit {
+
+  Studentform = new FormGroup({ 
+    fullname: new FormControl(),
+    email: new FormControl(),
+    pass: new FormControl(),
+    avatar: new FormControl(),
+    gender: new FormControl(),
+    birthday: new FormControl(),
+    roles:new FormControl()
+  })
 
   students: any = {
     username: "",
@@ -21,8 +32,12 @@ export class EditStudentComponent implements OnInit {
   }
 
   id: any = ''
+  roles= [
+    'member',
+    'admin'
+  ]
 
-  constructor(private studentService: StudentService,private router:ActivatedRoute) { }
+  constructor(private studentService: StudentService,private router:ActivatedRoute,private routers:Router) { }
 
   ngOnInit(): void {
     this.router.params.subscribe(data =>{
@@ -31,25 +46,23 @@ export class EditStudentComponent implements OnInit {
     })
 
     this.getStudent()
+   
     
   }
 
   getStudent(){
-    console.log(this.id)
     this.studentService.list_id(this.id)
     .subscribe(data => {
-      console.log(data.birthday)
       this.students = {...data}
+      console.log(this.students)
     })
   }
 
   putStudent() {
-    console.log(this.id)
     this.studentService.put(this.students,this.id)
       .subscribe(newStudent => {
-        console.log(newStudent)
         alert("Update finish")
-        window.location.href = "http://localhost:4200/admin/sinh-vien"
+        this.routers.navigate(["/admin/sinh-vien"])
       });
   }
 

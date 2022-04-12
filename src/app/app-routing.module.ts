@@ -30,20 +30,21 @@ const routes: Routes = [
   {
     path:"",
     component:HomeComponent,
-    canActivate: [AuthGuard],
     children:[
       {
         path:"mon-hoc",
         component:SubjectComponent,
-        canActivate: [AuthGuard]
+        
       },
       {
         path:"quiz/:id",
-        component:QuizComponent
+        component:QuizComponent,
+        canActivate: [AuthGuard]
       },
       {
         path:"quiz/:id/ketqua",
-        component:FinalComponent
+        component:FinalComponent,
+        canActivate: [AuthGuard]
       },
     ]
   },

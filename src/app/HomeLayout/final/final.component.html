@@ -1,7 +1,7 @@
 
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light banner">
     <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 fw-normal">Final</h1>
+        <h1 class="display-4 fw-normal">Kết quả</h1>
         <p class="lead fw-normal">Kêt quả của học sinh chu tất bách.</p>
         <a class="btn btn-outline-secondary" href="#">Coming soon</a>
     </div>
@@ -11,7 +11,7 @@
 <div class="container py-5 body" [ngStyle]="{'min-height':style}">
     <div class="row text-center text-white mb-5">
         <div class="col-lg-7 mx-auto">
-            <h1 class="display-4  font-italic font-weight-bold">Final students List</h1>
+            <h1 class="display-4  font-italic font-weight-bold">Số điểm bạn nhận được </h1>
         </div>
         <div class="col-lg-7 mx-auto mt-5 bg-light py-5" *ngIf="show_subject == undefined">
             <span class="display-6 text-gray" >bạn chưa có điểm môn này</span>
@@ -30,7 +30,7 @@
                                 {{user.username}} | {{user.code}}</p>
                             <p class="font-italic text-muted mb-0 small">Số điểm nhận được {{show_subject}}</p>
                             <div class="d-flex align-items-center justify-content-between mt-1">
-                                <div><a href="/quiz/{{subject_save.code}}"> <button
+                                <div><a [routerLink]="['/quiz',subject_save.code]"> <button
                                             class="btn btn-dark text-uppercase btn-hover"> Làm lại </button></a> </div>
                             </div>
                         </div><img src="assets/images/logos/{{subject_save.logo}}" alt="Generic placeholder image" width="200"

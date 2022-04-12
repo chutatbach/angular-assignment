@@ -36,6 +36,8 @@ export class FinalComponent implements OnInit {
       .subscribe((data) => {
         this.user = data[0]
         this.show_subject = this.user.marks[this.id]
+        console.log(this.user.marks);
+        
         console.log(this.show_subject)
       })
       this.check_user()

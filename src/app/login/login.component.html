@@ -20,14 +20,14 @@
                                                             <div class="bach-chu"></div>
                                                             <h4 class="mb-4 my-3 pb-3 text-white">Log In</h4>
                                                             <form action="" [formGroup]="studentForm"
-                                                                (ngSubmit)='submitForm()'>
+                                                               >
                                                                 <div class="form-group">
                                                                     <label for="" class="text-white">Email</label>
                                                                     <input type="text" name="logemail"
                                                                         class="form-style" placeholder="Your Email"
                                                                         [(ngModel)]="student.email"
                                                                         formControlName="Email" id="logemail"
-                                                                        autocomplete="off" > 
+                                                                         > 
                                                                         <i
                                                                         class="input-icon uil uil-at"></i>
                                                                     <div class="show-error mt-3">
@@ -41,11 +41,11 @@
                                                                                 long.
                                                                             </div>
                                                                             <div
-                                                                                *ngIf="Email.errors?.['email']">
+                                                                                *ngIf="Email.errors['email']">
                                                                                 Email error
                                                                             </div>
                                                                             <div
-                                                                                *ngIf="Email.errors?.['forbiddenName']">
+                                                                                *ngIf="Email.errors['forbiddenName']">
                                                                                 Name cannot be Bob.
                                                                             </div>
                                                                         </div>
@@ -56,7 +56,7 @@
                                                                     <input type="password" name="logpass"
                                                                         class="form-style" placeholder="Your Password"
                                                                         formControlName="Pass" id="logpass" name
-                                                                        autocomplete="off"> <i
+                                                                     > <i
                                                                         class="input-icon uil uil-lock-alt"></i>
 
                                                                     <div class="show-error mt-3">
@@ -73,7 +73,7 @@
                                                                     </div>
 
                                                                 </div><button class="btn mt-4" type="submit"
-                                                                    [disabled]="!studentForm.valid">submit</button>
+                                                                    [disabled]="!studentForm.valid"  (click)='submitForm()'>submit</button>
                                                                 <p class="mb-0 mt-4 text-center"><a href="#0"
                                                                         class="link">Forgot your password?</a></p>
                                                             </form>

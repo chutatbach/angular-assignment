@@ -32,10 +32,10 @@ export class StudentComponent implements OnInit {
   remove(item: any) {
     if (confirm('do you want delete?') == true) {
       this.studentService.delete(item.id)
-      .subscribe(data => {
-        this.user = this.user.filter((value) => { return value.id != item.id })
-      })
-    }else {
+        .subscribe(data => {
+          this.user = this.user.filter((value) => { return value.id != item.id })
+        })
+    } else {
 
     }
   }
@@ -45,9 +45,9 @@ export class StudentComponent implements OnInit {
     return typeof obj === 'object'
   }
 
-  isArray(obj : any ) {
+  isArray(obj: any) {
     return Array.isArray(obj)
- }
-    
+  }
+
 
 }

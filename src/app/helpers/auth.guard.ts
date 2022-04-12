@@ -17,8 +17,10 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
-  roles():boolean {
-    return true
-  }
+  // roles():boolean {
+  //   const loggedInUser = JSON.parse(localStorage.getItem('login_user') || "{}");
+    
+  //   return true
+  // }
 
 }

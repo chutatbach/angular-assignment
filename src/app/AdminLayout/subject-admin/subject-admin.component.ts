@@ -8,7 +8,6 @@ import { SubjectService } from 'src/app/services/subject.service';
 })
 export class SubjectAdminComponent implements OnInit {
 
-
   subject :Array<any> = [];
   keyword:any = ''
   constructor(private subjectService: SubjectService) { }

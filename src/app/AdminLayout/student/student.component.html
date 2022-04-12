@@ -17,19 +17,16 @@
                                           </div>
                                     </form>
                                 </th>
-                                <th>Username</th>
-                                <th>Password</th>
                                 <th>Fullname</th>
+                                <th>Avatar</th>
+                                <th>Password</th>
                                 <th>Email</th>
                                 <th>Birthday</th>
-                                <th>Schoolfee</th>
                                 <th>Gender</th>
-                                <th>Marks</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
-                        
                         <tbody class="table-body" *ngIf="user.length > 0">
                             <tr class="cell-1" *ngFor="let item of user">
                                 <td class="text-center">
@@ -40,14 +37,11 @@
                                           </div>
                                     </form>
                                 </td>
-                                <td>{{item.username}}</td>
-                                <td>{{item.password}}</td>
                                 <td>{{item.fullname}}</td>
+                                <td><img [src]="item.avatar" width="100px" alt=""></td>                                <td>{{item.pass}}</td>
                                 <td>{{item.email}}</td>
                                 <td>{{item.birthday}}</td>
-                                <td>{{item.schoolfee}}</td>
                                 <td>{{item.gender|gender}}</td>
-                                <td>{{isObject(item.marks)? item.marks['ADAV'] : item.marks}}</td>
                                 <!-- <td><i class="fa fa-ellipsis-h text-black-50"></i></td> -->
                                 <td><a href="http://localhost:4200/admin/sinh-vien/edit/{{item.id}}" class="badge badge-info">Update</a></td>
                                 <td><span href="" (click)="remove(item)" class="badge badge-danger cursor-pointer">Delete</span></td>

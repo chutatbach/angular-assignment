@@ -22,6 +22,9 @@ export class StudentService {
   google_id(id: any): Observable<any>{
     return this.http.get<any>(`${environment.student_api}?googleID=${id}`);
   }
+  email(email: any): Observable<any>{
+    return this.http.get<any>(`${environment.student_api}?email=${email}`);
+  }
   finish(id: any): Observable<any>{
     return this.http.get<any>(`${environment.student_api}?googleID=${id}`);
   }

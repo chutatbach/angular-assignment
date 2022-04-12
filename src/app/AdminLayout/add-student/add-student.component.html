@@ -1,39 +1,52 @@
 <div class="container d-flex justify-content-center">
     <div class="row my-2 mx-2">
-        <div class="col-md-6"> <img src="https://png.pngtree.com/png-vector/20190725/ourlarge/pngtree-message-icon-design-vector-png-image_1587713.jpg" alt="IMG"> </div>
+        <div class="col-md-6"> <img
+                src="https://png.pngtree.com/png-vector/20190725/ourlarge/pngtree-message-icon-design-vector-png-image_1587713.jpg"
+                alt="IMG"> </div>
         <!--col-->
         <div class="col-md-6">
-            <h2 class="form-title">Add student</h2>
-            <p class="justify text-muted">Have an enquiry or would like to give us feedback?<br>Fill out the form below to contact our team.</p>
-                <div class="form-group pt-2 pl-1"> 
-                    <label for="exampleInputName">Enter username</label> <input type="text" class="form-control" [(ngModel)] = "students.username">
+            <form action="" [formGroup]="Studentform">
+                <h2 class="form-title">Add student</h2>
+                <p class="justify text-muted">Have an enquiry or would like to give us feedback?<br>Fill out the form
+                    below
+                    to contact our team.</p>
+                <div class="form-group pl-1">
+                    <label for="exampleFormControlTextarea1">Nhập fullname</label> <input type="text"
+                        class="form-control" id="exampleInputName"  formControlName="fullname">
                 </div>
-                <div class="form-group pl-1"> 
-                    <label for="exampleInputEmail1">Enter password</label> <input type="password" class="form-control" [(ngModel)] = "students.password"> 
+                <div class="form-group pl-1">
+                    <label for="exampleInputEmail1">Nhập password</label> <input type="password" class="form-control" formControlName="pass">
                 </div>
-                <div class="form-group pl-1"> 
-                    <label for="exampleFormControlTextarea1">Enter fullname</label> <input type="text" class="form-control" id="exampleInputName" [(ngModel)] = "students.fullname">
+                <div class="form-group pl-1">
+                    <label for="exampleInputEmail1">Nhập email</label> <input type="email" class="form-control" formControlName="email">
                 </div>
-                <div class="form-group pl-1"> 
-                    <label for="exampleInputEmail1">Enter email</label> <input type="email" class="form-control"  [(ngModel)] = "students.email"> 
-                </div>
-                <div class="form-group pl-1"> 
-                    <label for="exampleInputEmail1" class="options">Enter gender</label> 
+                <div class="form-group pl-1">
+                    <label for="exampleInputEmail1" class="options">Chọn giới tính</label>
                     <br>
-                    <span class="font-weight-bold mx-1">Nam </span><input type="radio"  name="radio" [(ngModel)] = "students.gender" value="true"> 
-                    <span class="font-weight-bold mx-1">Nu </span><input type="radio"  name="radio" [(ngModel)] = "students.gender" value="false"> 
+                    <span class="font-weight-bold mx-1">Nam </span><input type="radio" name="gender" value="true"  formControlName="gender">
+                    <span class="font-weight-bold mx-1">Nữ </span><input type="radio" name="gender" value="false"  formControlName="gender">
                 </div>
 
-                <div class="form-group pl-1"> 
-                    <label for="exampleFormControlTextarea1">Enter birthday</label> <input type="date" class="form-control" [(ngModel)] = "students.birthday"> 
+                <div class="form-group pl-1">
+                    <select name="" id="" formControlName="roles">
+                        <option [ngValue]="roles[0]" selected>Thành viên</option>
+                        <option [ngValue]="roles[1]">Quản trị</option>
+                    </select>
                 </div>
-                <div class="form-group pl-1"> 
-                    <label for="exampleFormControlTextarea1">Enter schoolfee</label> <input type="number" class="form-control" [(ngModel)] = "students.schoolfee"> 
+
+                <div class="form-group pl-1">
+                    <label for="exampleFormControlTextarea1">Ngày sinh</label> <input type="date" class="form-control" formControlName="birthday"> 
                 </div>
-                <input type="number" value="0" class="form-control"  [(ngModel)] = "students.marks" hidden> 
+
+                <div class="form-group pl-1">
+                    <label for="exampleFormControlTextarea1">Avatar</label> <input type="text" class="form-control" formControlName="avatar"> 
+                </div>
+
                 <div class="row">
-                    <div class="col-md-3 offset-md-9"><button type="submit" class="btn btn-primary" (click)="addStudent()">ADD</button></div>
+                    <div class="col-md-3 offset-md-9"><button type="submit" class="btn btn-primary"
+                            (click)="addStudent()">ADD</button></div>
                 </div>
+            </form>
         </div>
         <!--col-->
     </div>
