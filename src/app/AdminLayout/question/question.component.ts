@@ -87,7 +87,7 @@ export class QuestionComponent implements OnInit {
   })
   index_question: any = ''
   roles = ''
-  get Answers(){
+  get Answers() {
     return this.questionform.get('Answers') as FormArray
   }
   showput(question: any, index: any) {
@@ -105,16 +105,18 @@ export class QuestionComponent implements OnInit {
       this.Answers.push(new FormGroup({ Id: new FormControl(val.Id), Text: new FormControl(val.Text) }))
     }
     this.index_question = index
-    console.log(this.Answers)
   }
   addChild_put() {
     this.Answers.push(new FormGroup({ Id: new FormControl(this.random()), Text: new FormControl('') }))
   }
   update() {
     this.question.put(this.code, this.questionform.value.id, this.questionform.value).subscribe(data => {
+      console.log(data,this.quiz[this.index_question]);
+      
       this.quiz[this.index_question] = { ...data }
       this.close()
     })
+    alert('ban sua thanh cong')
     new showSuccessToast()
   }
   //-----------------------------delete---------------------------------------
@@ -188,5 +190,14 @@ export class QuestionComponent implements OnInit {
       return data.AnswerId != i.AnswerId
     })
     console.log(i)
+  }
+  delputaswers(i: any) {
+    this.Answers.controls = this.Answers.controls.filter((data: any, index: any) => {
+      return i != index
+    })
+    // this.questionform.value = this.Answers.value.filter((data: any, index: any) => {
+    //   return i != index
+    // })
+    console.log(this.questionform.value)
   }
 }

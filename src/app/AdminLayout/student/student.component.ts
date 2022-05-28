@@ -40,7 +40,6 @@ export class StudentComponent implements OnInit {
     }
   }
 
-
   isObject(obj: any) {
     return typeof obj === 'object'
   }

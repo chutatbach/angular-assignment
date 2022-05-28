@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StudentService } from 'src/app/services/student.service';
 
 @Component({
@@ -32,7 +32,6 @@ export class AddStudentComponent implements OnInit {
     this.Studentform.value.roles = [{name}]
     this.studentService.addNew( this.Studentform.value)
       .subscribe(newStudent => {
-        console.log(newStudent)
         alert("Add finish")
         window.location.href = "http://localhost:4200/admin/sinh-vien"
       });

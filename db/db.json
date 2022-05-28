@@ -19,7 +19,7 @@
       ],
       "marks": {
         "ADTE": 3,
-        "ADAV": "4",
+        "ADAV": "2",
         "INMA": 0
       }
     },
@@ -54,6 +54,20 @@
         }
       ],
       "id": 3
+    },
+    {
+      "fullname": "vcashvashcas",
+      "email": "dasdas343434d@gmail.com",
+      "pass": "asdasd234234",
+      "avatar": "https://i.pinimg.com/736x/37/5e/18/375e1869180266c90f95a1f2808097a7.jpg",
+      "gender": "true",
+      "birthday": "2022-04-16",
+      "roles": [
+        {
+          "name": "member"
+        }
+      ],
+      "id": 4
     }
   ],
   "subjects": [
@@ -1762,58 +1776,6 @@
         {
           "Id": 104390,
           "Text": "Google Play Service SDK"
-        },
-        {
-          "Id": 104391,
-          "Text": "Android Support Library"
-        }
-      ]
-    },
-    {
-      "id": 25179,
-      "Text": "Trong các quyền dưới đây, quyền nào không cần thiết để hiển thị Google Map?",
-      "Marks": 1,
-      "AnswerId": 104392,
-      "Answers": [
-        {
-          "Id": 104392,
-          "Text": "android.permission.CHANGE_sadasdCONFIGURATION"
-        },
-        {
-          "Id": 104393,
-          "Text": "android.permission.ACCESS_NETWORK_STATE"
-        },
-        {
-          "Id": 104394,
-          "Text": "android.permission.WRITE_EXTERNAL_STORAGE"
-        }
-      ]
-    },
-    {
-      "id": 25181,
-      "Text": "Trong Eclipse, làm thế nào để biết được đường dẫn của debug keystore?",
-      "Marks": 1,
-      "AnswerId": 104401,
-      "Answers": [
-        {
-          "Id": 104400,
-          "Text": "Không có cách nàfdgdfgdgo để biết được đường dẫn debug keystore"
-        },
-        {
-          "Id": 104401,
-          "Text": "Vào Eclipse, Preferences->Android->Build"
-        },
-        {
-          "Id": 104402,
-          "Text": "Vào Eclipse, Preferences->Android->DDMS"
-        },
-        {
-          "Id": "",
-          "Text": "qưewqewqe"
-        },
-        {
-          "Id": 103269,
-          "Text": "sdsadasd"
         }
       ]
     }
@@ -3754,20 +3716,8 @@
           "Text": "Symbian"
         },
         {
-          "Id": 104109,
-          "Text": "Android"
-        },
-        {
-          "Id": 104110,
-          "Text": "Firefox OS"
-        },
-        {
-          "Id": 104111,
-          "Text": "Window Phone"
-        },
-        {
-          "Id": 104112,
-          "Text": "iOS"
+          "Id": 104489,
+          "Text": "eqwewqe"
         }
       ]
     },

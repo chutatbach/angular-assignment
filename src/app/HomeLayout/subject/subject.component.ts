@@ -8,19 +8,25 @@ import { SubjectService } from 'src/app/services/subject.service';
   styleUrls: ['./subject.component.css']
 })
 export class SubjectComponent implements OnInit {
-  subject :any = [];
+  subject: any = [];
   constructor(private subjectSevice: SubjectService) { }
 
   ngOnInit(): void {
     this.getSubject()
   }
 
-  getSubject (searchKeyword:string = ""){
-    this.subjectSevice.list(searchKeyword)
-    .subscribe(data => {
-      console.log(data)
-      this.subject = data
-    })
+  getSubject(searchKeyword: string = "") {
+    try {
+      this.subjectSevice.list(searchKeyword)
+        .subscribe(data => {
+          console.log(data)
+          this.subject = data
+        })
+    } catch (error) {
+      console.log(error);
+      
+    }
+
   }
 
 }

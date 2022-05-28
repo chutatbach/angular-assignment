@@ -7,8 +7,8 @@ export const environment = {
   production: false,
   GOOGLE_CLIENT_ID: "166483469020-cmp82e6n3c0vbo8uo5973gg7nabpe8gd.apps.googleusercontent.com",
   GOOGLE_SECRET_ID: "",
-  student_api: `${baseAPIURL}/students`,
-  subject_api: `${baseAPIURL}/subjects`,
+  student_api: `${baseAPIURL}/Students`,
+  subject_api: `${baseAPIURL}/Subjects`,
   baseURL: `${baseAPIURL}`
 };
 

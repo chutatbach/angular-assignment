@@ -48,12 +48,11 @@ export class QuizComponent implements OnInit {
         this.prepare()
       }
     }, 1000)
-
   }
   getdata() {
     this.subjectSevice.getsubject_code(this.code)
       .subscribe(data => {
-        data.sort(() => Math.random() - 0.5)
+        // data.sort(() => Math.random() - 0.5)
         this.quiz = data.filter((val: any, index: any) => {
           return index && index < 11
         })

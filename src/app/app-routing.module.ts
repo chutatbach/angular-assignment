@@ -39,12 +39,12 @@ const routes: Routes = [
       {
         path:"quiz/:id",
         component:QuizComponent,
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
       },
       {
         path:"quiz/:id/ketqua",
         component:FinalComponent,
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
       },
     ]
   },
@@ -69,7 +69,6 @@ const routes: Routes = [
         path:'sinh-vien/edit/:id',
         component:EditStudentComponent
       },
-
       {
         path:'mon-hoc',
         component:SubjectAdminComponent
@@ -82,7 +81,6 @@ const routes: Routes = [
         path:'mon-hoc/edit/:id',
         component:EditSubjectComponent
       },
-
       {
         path:'cau-hoi/:id',
         component:QuestionComponent

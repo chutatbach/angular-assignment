@@ -23,23 +23,29 @@
                                         style=" border: 1px solid rgb(133, 133, 133);padding: 5%;border-radius: 40px;">
 
                                         <div class="" [formGroupName]="i">
-                                            <h4 for="" class="">Trả lời:</h4>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h4 for="" class="">Trả lời:</h4>
+                                                <span class="btn btn-danger" (click)="delputaswers(i)">Xóa</span>
+                                            </div>
 
                                             <div class="form-label-group"> <input type="text"
                                                     class="form-control p-2 my-3" placeholder="Answers"
-                                                    formControlName="Text" [value]="val.get('Text')?.value"></div>
+                                                    formControlName="Text" [value]="val.get('Text')?.value"></div> 
+                                                    <!-- ? có hoặc không có thuộc tính value -->
                                             <div class="">
                                                 <div class="form-check">
                                                     <label class="form-check-label">True:</label>
                                                     <input type="radio" class="form-check-input mx-3"
-                                                        value="{{questionform.value.AnswerId}}"
+                                                        [value]="questionform.value.AnswerId" formControlName="Id"
                                                         name="{{val.get('Id')?.value}}"
                                                         [checked]="val.get('Id')?.value == questionform.value.AnswerId? true:false">
                                                 </div>
+                                                {{val.get('Id')?.value}}
                                                 <div class="form-check">
                                                     <label class="form-check-label">False:</label>
                                                     <input type="radio" class="form-check-input mx-3"
-                                                        value="{{val.get('Id')?.value}}" name="{{val.get('Id')?.value}}"
+                                                        [value]="val.get('Id')?.value"  formControlName="Id"
+                                                        name="{{val.get('Id')?.value}}"
                                                         [checked]="val.get('Id')?.value != questionform.value.AnswerId? true:false">
                                                 </div>
                                             </div>
@@ -84,12 +90,12 @@
                                 <div class="">
                                     <div class="form-check">
                                         <label class="form-check-label">True:</label>
-                                        <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}"
+                                        <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}" 
                                             (change)="clickAnswer(i,val.AnswerId,a)">
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">False:</label>
-                                        <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}" checked
+                                        <input type="radio" class="form-check-input mx-3" name="{{i}}{{a}}"
                                             (change)="clickAnswer(i,random(),a)">
                                     </div>
                                 </div>
